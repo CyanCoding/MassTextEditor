@@ -98,13 +98,15 @@ func main() {
 	fmt.Println("(5) Remove all lines with non-letters")
 	fmt.Println("(6) Remove all lines with a length less than x")
 	fmt.Println("(7) Remove all lines with a length greater than x")
+	fmt.Println("(8) Convert entire file to lowercase")
+	fmt.Println("(9) Convert entire file to uppercase")
 	fmt.Println("------------------------------------------------")
 	var action int = 0
 	for {
 		fmt.Print("Action number > ")
 		fmt.Scanln(&action)
 
-		if action > 0 && action < 8 { // Action is valid
+		if action > 0 && action < 10 { // Action is valid
 			break
 		} else {
 			fmt.Println()
@@ -156,6 +158,10 @@ func main() {
 			addWord = true
 		} else if action == 7 && len(wordList[i]) <= specialLength {
 			addWord = true
+		} else if action == 8 {
+			newList = append(newList, strings.ToLower(wordList[i]))
+		} else if action == 9 {
+			newList = append(newList, strings.ToUpper(wordList[i]))
 		}
 
 		if addWord {
@@ -164,9 +170,9 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("Finished the job! Removed",
-		humanize.Comma(int64(len(wordList)-len(newList))),
-		"lines")
+	fmt.Println("Finished the job! The new file is",
+		humanize.Comma(int64(len(newList))),
+		"lines long.")
 
 	for {
 		fmt.Print("Output file path > ")
