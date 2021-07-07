@@ -92,6 +92,17 @@ func main() {
 		}
 	}
 
+	var specialCharacter string
+	if action == 3 {
+		fmt.Println()
+		fmt.Print("Please enter the character you want the file to include > ")
+		fmt.Scanln(&specialCharacter)
+	} else if action == 4 {
+		fmt.Println()
+		fmt.Print("Please enter the character you want the file to not include > ")
+		fmt.Scanln(&specialCharacter)
+	}
+
 	newList := make([]string, 0)
 
 	for i := 0; i < len(wordList); i++ {
@@ -107,13 +118,10 @@ func main() {
 			addWord = true
 		} else if action == 5 && IsLetter(wordList[i]) {
 			addWord = true
-			}
+		}
 
 		if addWord {
-				newList = append(newList, wordList[i])
-			}
-		} else if action == 3 {
-
+			newList = append(newList, wordList[i])
 		}
 	}
 
