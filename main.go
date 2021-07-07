@@ -96,13 +96,15 @@ func main() {
 	fmt.Println("(3) Remove all lines with a certain character")
 	fmt.Println("(4) Remove all lines without a certain character")
 	fmt.Println("(5) Remove all lines with non-letters")
+	fmt.Println("(6) Remove all lines with a length less than x")
+	fmt.Println("(7) Remove all lines with a length greater than x")
 	fmt.Println("------------------------------------------------")
 	var action int = 0
 	for {
 		fmt.Print("Action number > ")
 		fmt.Scanln(&action)
 
-		if action > 0 && action < 6 { // Action is valid
+		if action > 0 && action < 8 { // Action is valid
 			break
 		} else {
 			fmt.Println()
@@ -111,6 +113,7 @@ func main() {
 		}
 	}
 
+	// They want only certain characters
 	var specialCharacter string
 	if action == 3 {
 		fmt.Println()
@@ -120,6 +123,18 @@ func main() {
 		fmt.Println()
 		fmt.Print("Please enter the character you want the file to not include > ")
 		fmt.Scanln(&specialCharacter)
+	}
+
+	// They want only short/long strings
+	var specialLength int
+	if action == 6 {
+		fmt.Println()
+		fmt.Print("Please enter the smallest length you want present in the file > ")
+		fmt.Scanln(&specialLength)
+	} else if action == 7 {
+		fmt.Println()
+		fmt.Print("Please enter the largest length you want present in the file > ")
+		fmt.Scanln(&specialLength)
 	}
 
 	newList := make([]string, 0)
@@ -136,6 +151,10 @@ func main() {
 		} else if action == 4 && !strings.Contains(wordList[i], specialCharacter) {
 			addWord = true
 		} else if action == 5 && IsLetter(wordList[i]) {
+			addWord = true
+		} else if action == 6 && len(wordList[1]) >= specialLength {
+			addWord = true
+		} else if action == 7 && len(wordList[i]) <= specialLength {
 			addWord = true
 		}
 
