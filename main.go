@@ -32,6 +32,17 @@ func IsUpper(s string) bool {
 	return true
 }
 
+// Checks letter by letter to see if a string is only alphabetic
+// if it hits an invalid letter it returns false and exits
+func IsLetter(s string) bool {
+	for _, r := range s {
+		if !unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
+}
+
 // Checks letter by letter to see if a string is fully lowercase
 // if it hits an uppercase letter it returns false and exits
 func IsLower(s string) bool {
@@ -65,13 +76,14 @@ func main() {
 	fmt.Println("(2) Remove all lines with lowercase letters")
 	fmt.Println("(3) Remove all lines with a certain character")
 	fmt.Println("(4) Remove all lines without a certain character")
+	fmt.Println("(5) Remove all lines with non-letters")
 	fmt.Println("------------------------------------------------")
 	var action int = 0
 	for {
 		fmt.Print("Action number > ")
 		fmt.Scanln(&action)
 
-		if action > 0 && action < 5 { // Action is valid
+		if action > 0 && action < 6 { // Action is valid
 			break
 		} else {
 			fmt.Println()
@@ -83,12 +95,21 @@ func main() {
 	newList := make([]string, 0)
 
 	for i := 0; i < len(wordList); i++ {
-		if action == 1 {
-			if IsLower(wordList[i]) {
-				newList = append(newList, wordList[i])
+		addWord := false
+
+		if action == 1 && IsLower(wordList[i]) {
+			addWord = true
+		} else if action == 2 && IsUpper(wordList[i]) {
+			addWord = true
+		} else if action == 3 && strings.Contains(wordList[i], specialCharacter) {
+			addWord = true
+		} else if action == 4 && !strings.Contains(wordList[i], specialCharacter) {
+			addWord = true
+		} else if action == 5 && IsLetter(wordList[i]) {
+			addWord = true
 			}
-		} else if action == 2 {
-			if IsUpper(wordList[i]) {
+
+		if addWord {
 				newList = append(newList, wordList[i])
 			}
 		} else if action == 3 {
