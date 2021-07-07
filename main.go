@@ -69,7 +69,6 @@ func main() {
 	var action int = 0
 	for {
 		fmt.Print("Action number > ")
-		var action int = 0
 		fmt.Scanln(&action)
 
 		if action > 0 && action < 5 { // Action is valid
@@ -78,6 +77,22 @@ func main() {
 			fmt.Println()
 			fmt.Println("Invalid action!")
 			fmt.Println()
+		}
+	}
+
+	newList := make([]string, 0)
+
+	for i := 0; i < len(wordList); i++ {
+		if action == 1 {
+			if IsLower(wordList[i]) {
+				newList = append(newList, wordList[i])
+			}
+		} else if action == 2 {
+			if IsUpper(wordList[i]) {
+				newList = append(newList, wordList[i])
+			}
+		} else if action == 3 {
+
 		}
 	}
 
