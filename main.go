@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"unicode"
 )
 
 func ReadWordsFile(path string) []string {
@@ -18,6 +19,28 @@ func ReadWordsFile(path string) []string {
 	words := strings.Fields(text)
 
 	return words
+}
+
+// Checks letter by letter to see if a string is fully uppercase
+// if it hits a lowercase letter it returns false and exits
+func IsUpper(s string) bool {
+	for _, r := range s {
+		if !unicode.IsUpper(r) && unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
+}
+
+// Checks letter by letter to see if a string is fully lowercase
+// if it hits an uppercase letter it returns false and exits
+func IsLower(s string) bool {
+	for _, r := range s {
+		if !unicode.IsLower(r) && unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
 }
 
 func main() {
