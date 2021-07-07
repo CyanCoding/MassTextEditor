@@ -152,7 +152,7 @@ func main() {
 			addWord = true
 		} else if action == 5 && IsLetter(wordList[i]) {
 			addWord = true
-		} else if action == 6 && len(wordList[1]) >= specialLength {
+		} else if action == 6 && len(wordList[i]) >= specialLength {
 			addWord = true
 		} else if action == 7 && len(wordList[i]) <= specialLength {
 			addWord = true
