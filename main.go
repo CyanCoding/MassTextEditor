@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"strings"
 	"unicode"
@@ -58,7 +59,8 @@ func IsLower(s string) bool {
 func WriteToFile(wordList []string, path string) bool {
 	file, err := os.Create(path)
 
-	if err == nil {
+	if err != nil {
+		log.Fatal(err)
 		return false
 	}
 
