@@ -159,6 +159,7 @@ func main() {
 		fmt.Println()
 		if success {
 			fmt.Println("Thanks for using the MassTextEditor!")
+			break
 		}
 		if !success {
 			fmt.Println("Failed to write to the file! Please try again.")
