@@ -44,6 +44,7 @@ func IsLower(s string) bool {
 }
 
 func main() {
+	var wordList []string
 	for {
 		fmt.Print("Please enter a text file path > ")
 		var path string
@@ -51,7 +52,7 @@ func main() {
 
 		fmt.Println()
 		fmt.Println("Reading file...")
-		wordList := ReadWordsFile(path)
+		wordList = ReadWordsFile(path)
 
 		if wordList != nil {
 			fmt.Println("Finished reading file of ", len(wordList), " lines")
@@ -65,6 +66,7 @@ func main() {
 	fmt.Println("(3) Remove all lines with a certain character")
 	fmt.Println("(4) Remove all lines without a certain character")
 	fmt.Println("------------------------------------------------")
+	var action int = 0
 	for {
 		fmt.Print("Action number > ")
 		var action int = 0
