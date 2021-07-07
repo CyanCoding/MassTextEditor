@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cyancoding/go-humanize"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -84,7 +85,7 @@ func main() {
 		wordList = ReadWordsFile(path)
 
 		if wordList != nil {
-			fmt.Println("Finished reading file of ", len(wordList), " lines")
+			fmt.Println("Finished reading file of", humanize.Comma(int64(len(wordList))), "lines")
 			break
 		}
 	}
@@ -144,7 +145,9 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("Finished the job!")
+	fmt.Println("Finished the job! Removed",
+		humanize.Comma(int64(len(wordList)-len(newList))),
+		"lines")
 
 	for {
 		fmt.Print("Output file path > ")
