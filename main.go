@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 	"unicode"
 )
@@ -51,6 +52,21 @@ func IsLower(s string) bool {
 			return false
 		}
 	}
+	return true
+}
+
+func WriteToFile(wordList []string, path string) bool {
+	file, err := os.Create(path)
+
+	if err == nil {
+		return false
+	}
+
+	defer file.Close()
+	for _, line := range wordList {
+		file.WriteString(line + "\n")
+	}
+
 	return true
 }
 
@@ -122,6 +138,26 @@ func main() {
 
 		if addWord {
 			newList = append(newList, wordList[i])
+		}
+	}
+
+	fmt.Println()
+	fmt.Println("Finished the job!")
+
+	for {
+		fmt.Print("Output file path > ")
+		var outputPath string
+		fmt.Scanln(&outputPath)
+
+		success := WriteToFile(newList, outputPath)
+
+		fmt.Println()
+		if success {
+			fmt.Println("Thanks for using the MassTextEditor!")
+		}
+		if !success {
+			fmt.Println("Failed to write to the file! Please try again.")
+			fmt.Println()
 		}
 	}
 
