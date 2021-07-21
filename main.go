@@ -73,6 +73,17 @@ func WriteToFile(wordList []string, path string) bool {
 	return true
 }
 
+func contains(array []string, str string) bool {
+	for _, a := range array {
+		if a == str {
+			return true
+		}
+	}
+	return false
+}
+
+var duplicateList []string
+
 func main() {
 	var wordList []string
 	for {
@@ -100,13 +111,16 @@ func main() {
 	fmt.Println("(7) Remove all lines with a length greater than x")
 	fmt.Println("(8) Convert entire file to lowercase")
 	fmt.Println("(9) Convert entire file to uppercase")
+	fmt.Println("(10) Remove all duplicate lines")
+	fmt.Println()
+	fmt.Println("(11) List all words of a certain length")
 	fmt.Println("------------------------------------------------")
 	var action int = 0
 	for {
 		fmt.Print("Action number > ")
 		fmt.Scanln(&action)
 
-		if action > 0 && action < 10 { // Action is valid
+		if action > 0 && action <= 11 { // Action is valid
 			break
 		} else {
 			fmt.Println()
@@ -137,6 +151,10 @@ func main() {
 		fmt.Println()
 		fmt.Print("Please enter the largest length you want present in the file > ")
 		fmt.Scanln(&specialLength)
+	} else if action == 11 {
+		fmt.Println()
+		fmt.Print("Please enter the length to find > ")
+		fmt.Scanln(&specialLength)
 	}
 
 	newList := make([]string, 0)
@@ -162,6 +180,16 @@ func main() {
 			newList = append(newList, strings.ToLower(wordList[i]))
 		} else if action == 9 {
 			newList = append(newList, strings.ToUpper(wordList[i]))
+		} else if action == 10 && !contains(duplicateList, wordList[i]) {
+			addWord = true
+			duplicateList = append(duplicateList, wordList[i])
+		} else if action == 11 {
+			for _, a := range wordList {
+				if len(a) == specialLength {
+					fmt.Println(a)
+				}
+			}
+			return
 		}
 
 		if addWord {
